@@ -5,9 +5,7 @@ use win11_act_types::{ActivationError, Config, Result};
 
 #[cfg(windows)]
 pub fn is_elevated() -> bool {
-    use windows::Win32::Foundation::BOOL;
-    use windows::Win32::System::SystemServices::SE_GROUP_ENABLED;
-    use windows::core::PWSTR;
+    use windows::Win32::Security::TOKEN_ELEVATION;
 
     unsafe {
         let mut token = std::mem::zeroed();
@@ -19,7 +17,7 @@ pub fn is_elevated() -> bool {
             return false;
         }
 
-        let mut elevation = std::mem::zeroed();
+        let mut elevation: TOKEN_ELEVATION = std::mem::zeroed();
         let mut size = 0;
         if windows::Win32::Security::GetTokenInformation(
             token,
@@ -33,7 +31,7 @@ pub fn is_elevated() -> bool {
         }
 
         let _ = windows::Win32::Foundation::CloseHandle(token);
-        elevation != BOOL(0)
+        elevation.TokenIsElevated != 0
     }
 }
 
