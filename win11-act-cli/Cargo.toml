@@ -1,0 +1,16 @@
+[package]
+name = "win11-act-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "win11-activator"
+path = "src/main.rs"
+
+[dependencies]
+win11-act-types = { path = "../win11-act-types" }
+win11-act-core = { path = "../win11-act-core" }
+clap = { workspace = true }
+anyhow = { workspace = true }

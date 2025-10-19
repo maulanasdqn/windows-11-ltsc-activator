@@ -1,0 +1,14 @@
+[package]
+name = "win11-act-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+win11-act-types = { path = "../win11-act-types" }
+win11-act-embed = { path = "../win11-act-embed" }
+anyhow = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+windows = { workspace = true }
